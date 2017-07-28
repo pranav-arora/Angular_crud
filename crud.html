@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="angular.min.js">
+    </script>
+    <script src="js/Task.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/factory.js"></script>
+    <script src="js/controller.js"></script>
+    <link rel="stylesheet" href="css/stylesheeet.css">
+    <title></title>
+</head>
+
+<body ng-app="myapp" ng-controller="myctrl">
+   <div>
+    <label for="">Name</label>
+    <input type="text" placeholder="type name here." ng-model="name">
+    <br>
+    <br>
+    <label for="">Description:</label>
+    <br>
+    <textarea cols="20" rows="6" ng-model="desc"></textarea>
+    <br>
+    <br>
+    <button ng-click="addRecord()">Add</button>
+    <button ng-disabled="disableButton" ng-click="removeRecord()">Delete</button>
+   
+    <button>Update</button> <br>
+    <br>
+    <input type="text" ng-model="search" placeholder="type name to search">
+<button>search</button>
+
+   
+    </div>
+    <div>
+<fieldset>
+    <legend>List</legend>
+<table>
+   <thead>
+    <tr>
+        <th>Id<select ng-click="orderByField='id'"> </select></th>
+        <th>Name<select ng-click="orderByField='name'"></select></th>
+        <th>Description<select ng-click="orderByField='desc'"></select></th>
+        <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-class={"red":task.markforDeletion,"yellow":task.markforEdit} ng-repeat="task in tasks|orderBy:orderByField:rev">
+        <td>{{task.id}}</td>
+        <td>{{task.name}}</td>
+        <td>{{task.desc}}</td>
+        <td><img src="images/delete.png" ng-click="showMarking(task)">
+        <img src="images/edit.png" ng-click="edit(task)" alt=""></td>
+    </tr>
+    </tbody>
+</table>
+</fieldset>
+</div>
+</body>
+</html>
